@@ -1,0 +1,29 @@
+# Python / Django
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.log
+
+# Environments
+.venv/
+.env
+
+# Django collected/static/media (dev)
+media/
+staticfiles/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Migrations cache
+*/migrations/__pycache__/
+
+
+frontend/node_modules/
+frontend/.next
