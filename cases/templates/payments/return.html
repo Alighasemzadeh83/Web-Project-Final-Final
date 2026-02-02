@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Payment Result</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f6f2e9;
+        color: #1c2129;
+        margin: 0;
+        padding: 40px 20px;
+      }
+      .card {
+        max-width: 520px;
+        margin: 0 auto;
+        background: #fffaf2;
+        border: 1px solid #e4dac8;
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 16px 40px rgba(29, 33, 41, 0.08);
+      }
+      .pill {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(196, 99, 45, 0.12);
+        color: #c4632d;
+        font-weight: 600;
+        font-size: 12px;
+      }
+      .muted {
+        color: #5c6876;
+        font-size: 14px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <span class="pill">Payment Return</span>
+      <h2 style="margin: 12px 0 6px;">Transaction Result</h2>
+      <p class="muted" style="margin: 0 0 14px;">
+        This page confirms the payment gateway response for bail or fine payments.
+      </p>
+      <div class="row">
+        <strong>Status</strong>
+        <span>{{ status }}</span>
+      </div>
+      <div class="row">
+        <strong>Reference</strong>
+        <span>{{ reference|default:"-" }}</span>
+      </div>
+      <div class="row">
+        <strong>Amount</strong>
+        <span>{{ amount|default:"-" }}</span>
+      </div>
+      <div class="row">
+        <strong>Redirect</strong>
+        <span id="countdown">10</span>
+      </div>
+      <div style="margin-top: 14px;">
+        <a id="return-link" class="pill" href="{{ return_to|default:'/' }}">Return now</a>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var returnTo = "{{ return_to|default:'' }}";
+        var seconds = 10;
+        var countdown = document.getElementById("countdown");
+        var link = document.getElementById("return-link");
+        if (link) link.href = returnTo;
+        var timer = setInterval(function () {
+          seconds -= 1;
+          if (countdown) countdown.textContent = String(seconds);
+          if (seconds <= 0) {
+            clearInterval(timer);
+            window.location.href = returnTo;
+          }
+        }, 1000);
+      })();
+    </script>
+  </body>
+</html>
