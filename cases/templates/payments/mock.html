@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Mock Payment Gateway (Local)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f6f2e9;
+        color: #1c2129;
+        margin: 0;
+        padding: 40px 20px;
+      }
+      .card {
+        max-width: 560px;
+        margin: 0 auto;
+        background: #fffaf2;
+        border: 1px solid #e4dac8;
+        border-radius: 16px;
+        padding: 20px 24px;
+        box-shadow: 0 16px 40px rgba(29, 33, 41, 0.08);
+      }
+      .pill {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: rgba(56, 126, 100, 0.12);
+        color: #3a7f67;
+        font-weight: 600;
+        font-size: 12px;
+      }
+      .muted {
+        color: #5c6876;
+        font-size: 14px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+        gap: 12px;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      .btn {
+        padding: 10px 16px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .btn.pay {
+        background: #3a7f67;
+        color: #fff;
+      }
+      .btn.cancel {
+        background: #e9e1d1;
+        color: #3b2f23;
+      }
+      .info {
+        background: rgba(196, 99, 45, 0.08);
+        border-radius: 12px;
+        padding: 12px;
+        margin-top: 12px;
+        border: 1px dashed rgba(196, 99, 45, 0.35);
+      }
+      a.btn {
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <span class="pill">Mock Gateway (Local)</span>
+      <h2 style="margin: 12px 0 6px;">Simulated Payment Gateway</h2>
+      <p class="muted" style="margin: 0 0 14px;">
+        This is a local sandbox used when no real gateway credentials are configured.
+      </p>
+
+      <div class="row">
+        <strong>Order ID</strong>
+        <span>{{ order_id|default:"-" }}</span>
+      </div>
+      <div class="row">
+        <strong>Authority</strong>
+        <span>{{ authority|default:"-" }}</span>
+      </div>
+      <div class="row">
+        <strong>Amount</strong>
+        <span>{{ amount|default:"-" }}</span>
+      </div>
+
+      <div class="info muted">
+        When you click Pay, you will be redirected to the callback URL and the payment will be marked as paid.
+      </div>
+
+      <div class="actions">
+        <a class="btn pay" href="/payments/mock/?action=pay&authority={{ authority }}&order_id={{ order_id }}&amount={{ amount }}&payment_id={{ payment_id }}&callback={{ callback|urlencode }}">Pay</a>
+        <a class="btn cancel" href="/payments/mock/?action=cancel&authority={{ authority }}&order_id={{ order_id }}&amount={{ amount }}&payment_id={{ payment_id }}&callback={{ callback|urlencode }}">Cancel</a>
+      </div>
+    </div>
+  </body>
+</html>
