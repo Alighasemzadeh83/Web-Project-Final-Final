@@ -167,3 +167,8 @@ python3 manage.py createsuperuser
 # Run only backend tests
 python3 manage.py test
 ```
+
+
+## Passwords
+docker super user <Erf>: ehsan@123
+others : changeme
